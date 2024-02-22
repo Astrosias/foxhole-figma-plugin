@@ -1,0 +1,15 @@
+{
+  "name": "warapi",
+  "id": "1329183023761041201",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": [
+    "figma"
+  ],
+  "networkAccess": {
+    "allowedDomains": ["https://war-service-live.foxholeservices.com"],
+    "reasoning": "This plugin retrieve information from this API"
+  }
+}
