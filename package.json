@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.json",
     "watch": "npm run build -- --watch"
   },
-  "author": "",
+  "author": "Astrosias",
   "license": "",
   "devDependencies": {
     "@figma/plugin-typings": "^1.84.0",

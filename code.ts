@@ -45,7 +45,7 @@ console.log(components_nodes)
 // console.log(response)
 
 
-const mega_fun = async (region: string) => {
+async function mega_fun(region: string) {
 
   const url = `https://war-service-live.foxholeservices.com/api/worldconquest/maps/${region}/dynamic/public`
   const response = await fetch(url)
@@ -84,9 +84,17 @@ const mega_fun = async (region: string) => {
   const json = await response.json()
   console.log(response.status)
   console.log(json)
+  var allPromises: Promise<any>[] = []
 
-  json.forEach( (region: string) => mega_fun(region));
-
+  json.forEach( (region: string) => {
+    const promisetmp = new Promise((resolve, reject) => resolve(mega_fun(region)))
+    allPromises.push(promisetmp)
+    console.log("Promised pushed")
+  })
+  Promise.all(allPromises).then(() => {
+    console.log("Plugin should close now")
+    figma.closePlugin()
+  })
 })()
 
 // Make sure to close the plugin when you're done. Otherwise the plugin will
