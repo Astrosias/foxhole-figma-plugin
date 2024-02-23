@@ -41,9 +41,7 @@ console.log(components_nodes)
 // You can access browser APIs in the <script> tag inside "ui.html" which has a
 // full browser environment (See https://www.figma.com/plugin-docs/how-plugins-run).
 
-// const response = fetch('https://war-service-live.foxholeservices.com/api/worldconquest/maps')
-// console.log(response)
-
+var plugedInstanceNodes: Array<InstanceNode> = []
 
 async function mega_fun(region: string) {
 
@@ -73,6 +71,7 @@ async function mega_fun(region: string) {
         current_element.x = coords[0] - component.width / 2
         current_element.y = coords[1] - component.height / 2
         current_element.name = "pluged" + icontype
+        plugedInstanceNodes.push(current_element)
       }
     })
   })
@@ -88,15 +87,13 @@ async function mega_fun(region: string) {
 
   json.forEach( (region: string) => {
     const promisetmp = new Promise((resolve, reject) => resolve(mega_fun(region)))
-    allPromises.push(promisetmp)
-    console.log("Promised pushed")
+    allPromises.push(promisetmp) // Saving every promise inside an array
   })
-  Promise.all(allPromises).then(() => {
-    console.log("Plugin should close now")
+  Promise.all(allPromises).then(() => {  // When all promises have resolved, terminate the plugin
+    var plugedGroupNode = figma.group(plugedInstanceNodes, figma.currentPage)
+    plugedGroupNode.name = "API Intel " + Date()
+    plugedGroupNode.locked = true
     figma.closePlugin()
   })
 })()
 
-// Make sure to close the plugin when you're done. Otherwise the plugin will
-// keep running, which shows the cancel button at the bottom of the screen.
-// figma.closePlugin();
