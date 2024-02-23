@@ -6,6 +6,8 @@ const small_ratio = 40960/35520;
 const coefx= coef * small_ratio;
 const coefy= coef;
 
+const baseGroupName = "API Intel "
+
 interface Dictionary<T> {
   [Key: string]: T;
 }
@@ -42,6 +44,17 @@ console.log(components_nodes)
 // full browser environment (See https://www.figma.com/plugin-docs/how-plugins-run).
 
 var plugedInstanceNodes: Array<InstanceNode> = []
+
+function removeOldIntel(){
+  console.log("Removing old public intel")
+  const allAPINodes = figma.currentPage.children.filter(child => child.name.startsWith(baseGroupName))
+  if (allAPINodes.length > 1) {
+    console.warn("Too many API Intel group found: " + allAPINodes.length +". Removing all of them.")
+  }
+  allAPINodes.forEach(node => node.remove())
+}
+
+removeOldIntel()
 
 async function mega_fun(region: string) {
 
