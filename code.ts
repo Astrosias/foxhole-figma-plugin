@@ -1,5 +1,5 @@
 const ratio = (40960 - 10230)/35520;
-const coef = 887;
+const coef = 890;
 const coefCol = coef * ratio;
 const coefLine = coef;
 const small_ratio = 40960/35520;
@@ -83,7 +83,7 @@ async function mega_fun(region: string) {
         var current_element = component.createInstance()
         current_element.x = coords[0] - component.width / 2
         current_element.y = coords[1] - component.height / 2
-        current_element.name = "pluged" + icontype
+        current_element.name = icon_dictionnary[String(icontype)] + teamid + region + current_element.x + ":" + current_element.y
         plugedInstanceNodes.push(current_element)
       }
     })
